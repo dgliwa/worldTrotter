@@ -40,6 +40,7 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        //TODO: disallow alphabetic characters using NSCharacterSet class (from a bluetooth keyboard or something)
         let existingTextHasDecimal = textField.text?.rangeOfString(".")
         let replacementTextHasDecimal = string.rangeOfString(".")
         
