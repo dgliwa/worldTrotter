@@ -12,12 +12,16 @@ import MapKit
 class MapViewController: UIViewController {
     
     var mapView: MKMapView!
-    
+    //TODO: add a button that allows for user to zoom on current location
+    //TODO: add three pins on the map (using code, not by user action), and cycle through pins with a button
     override func loadView() {
         mapView = MKMapView()
         view = mapView
         
-        let segmentedControl = UISegmentedControl(items: ["Standard", "Hybrid", "Satellite"])
+        let standardString = NSLocalizedString("Standard", comment: "Standard view map")
+        let hybridString = NSLocalizedString("Hybrid", comment: "Hybrid view map")
+        let satelliteString = NSLocalizedString("Satellite", comment: "Satellite view map")
+        let segmentedControl = UISegmentedControl(items: [standardString, hybridString, satelliteString])
         segmentedControl.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.addTarget(self, action: "mapTypeChanged:", forControlEvents: .ValueChanged)

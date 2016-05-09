@@ -36,8 +36,8 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func fahrenheitFieldChanged(textField: UITextField) {
-        if let text = textField.text, value = Double(text) {
-            fahrenheitValue = value
+        if let text = textField.text, number = numberFormatter.numberFromString(text) {
+            fahrenheitValue = number.doubleValue
         } else {
             fahrenheitValue = nil
         }
@@ -49,8 +49,12 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         //TODO: disallow alphabetic characters using NSCharacterSet class (from a bluetooth keyboard or something)
-        let existingTextHasDecimal = textField.text?.rangeOfString(".")
-        let replacementTextHasDecimal = string.rangeOfString(".")
+        
+        let currentLocale = NSLocale.currentLocale()
+        let decimalSeparator = currentLocale.objectForKey(NSLocaleDecimalSeparator) as! String
+        
+        let existingTextHasDecimal = textField.text?.rangeOfString(decimalSeparator)
+        let replacementTextHasDecimal = string.rangeOfString(decimalSeparator)
         
         if existingTextHasDecimal != nil && replacementTextHasDecimal != nil {
             return false
