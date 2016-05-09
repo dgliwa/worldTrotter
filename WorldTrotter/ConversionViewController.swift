@@ -13,6 +13,11 @@ class ConversionViewController: UIViewController {
     @IBOutlet var celsiusLabel: UILabel!
     
     @IBAction func fahrenheitFieldChanged(textField: UITextField) {
-        celsiusLabel.text = textField.text
+        if let text = textField.text where !text.isEmpty {
+            celsiusLabel.text = text
+        } else {
+            celsiusLabel.text = "???"
+        }
+        
     }
 }
