@@ -19,6 +19,8 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    //TODO: use viewWillLoad to change the background color based on the time of day.
+    
     var celsiusValue: Double? {
         if let value = fahrenheitValue {
             return (value - 32) * (5/9)
