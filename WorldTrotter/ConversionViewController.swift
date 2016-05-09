@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConversionViewController: UIViewController {
+class ConversionViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var celsiusLabel: UILabel!
     @IBOutlet var textField: UITextField!
@@ -37,6 +37,16 @@ class ConversionViewController: UIViewController {
     
     @IBAction func dismissKeyboard(sender: AnyObject) {
         textField.resignFirstResponder()
+    }
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        let existingTextHasDecimal = textField.text?.rangeOfString(".")
+        let replacementTextHasDecimal = string.rangeOfString(".")
+        
+        if existingTextHasDecimal != nil && replacementTextHasDecimal != nil {
+            return false
+        }
+        return true
     }
     
     func updateCelsiusValue() {
