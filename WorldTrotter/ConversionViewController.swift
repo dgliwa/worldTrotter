@@ -19,7 +19,13 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    //TODO: use viewWillLoad to change the background color based on the time of day.
+    override func viewWillAppear(animated: Bool) {
+        let hour = currentHour
+        if(hour < 6 || hour > 19) {
+            view.backgroundColor = UIColor.darkGrayColor()
+        }
+    }
+    
     
     var celsiusValue: Double? {
         if let value = fahrenheitValue {
@@ -67,4 +73,10 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
         nf.maximumFractionDigits = 1
         return nf
     }()
+    
+    let currentHour: Int = {
+        let date = NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        return calendar.component(NSCalendarUnit.Hour, fromDate: date)
+        }()
 }
