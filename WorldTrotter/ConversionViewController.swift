@@ -20,7 +20,7 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
-        let hour = currentHour
+        let hour = currentHour()
         if(hour < 6 || hour > 19) {
             view.backgroundColor = UIColor.darkGrayColor()
         }
@@ -78,9 +78,9 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
         return nf
     }()
     
-    let currentHour: Int = {
+    func currentHour() -> Int {
         let date = NSDate()
         let calendar = NSCalendar.currentCalendar()
         return calendar.component(NSCalendarUnit.Hour, fromDate: date)
-        }()
+    }
 }
